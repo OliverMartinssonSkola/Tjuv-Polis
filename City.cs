@@ -46,5 +46,39 @@ namespace TjuvochPolis
 
             }
         }
+
+        public static void Prison()
+        {
+            {
+                for (int i = 0; i < 22; i++)
+                {
+                    Console.Write('#');
+                }
+
+            }
+            Console.WriteLine();
+            for (int row = 0; row < Program.prison.GetLength(0); row++)
+            {
+                Console.Write('#');
+                for (int col = 0; col < Program.prison.GetLength(1); col++)
+                {
+                    Console.Write(' ');
+                }
+                Console.Write('#');
+                Console.WriteLine();
+            }
+            {
+                for (int i = 0; i < 22; i++)
+                {
+                    Console.Write('#');
+                }
+
+            }
+        }
+
+
+
+
+
     }
 }

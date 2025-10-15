@@ -11,14 +11,52 @@ namespace TjuvochPolis
         public string Name { get; set; }
         public int[] Location { get; set; }
         public int[] Direction { get; set; }
-        public List<string> Inventory { get; set; }
-        public Person(string name, int[] location, int[] direction, List<string> inventory)
+        public Person(string name, int[] location, int[] direction)
         {
             Name = name;
             Location = location;
             Direction = direction;
-            Inventory = inventory;
+        
             
         }
     }
+
+    class Citizen:Person
+    {
+        public bool IsCitizen { get; set; }
+        public Citizen(bool IsCitizens, string name, int[] location, int[] direction) : base(name, location, direction)
+        {
+            
+        }
+    }
+
+    class Cop:Person
+    {
+        public bool IsCop {  get; set; }
+
+        public Cop(bool IsCop, string name, int[] location, int[] direction) : base(name, location, direction)
+        {
+
+
+        }
+
+
+    }
+
+    class Thief:Person
+    {
+        public bool IsThief { get; set; }
+
+        public Thief(bool IsThief, string name, int[] location, int[] direction) : base (name, location, direction)
+        {
+
+        }
+
+
+    }
+
+    
+
+
+
 }
