@@ -19,6 +19,10 @@ namespace TjuvochPolis
         
             
         }
+        public virtual void Inventory()
+        {
+            List<string> list = new List<string>();
+        }
     }
 
     class Citizen:Person
@@ -27,6 +31,15 @@ namespace TjuvochPolis
         public Citizen(bool IsCitizens, string name, int[] location, int[] direction) : base(name, location, direction)
         {
             
+        }
+        public override void Inventory()
+        {
+            
+            List<string> belongings = new List<string>();
+            belongings.Add("Plånbok");
+            belongings.Add("Klocka");
+            belongings.Add("Nycklar");
+            belongings.Add("Mobiltelefon");
         }
     }
 
@@ -39,7 +52,10 @@ namespace TjuvochPolis
 
 
         }
-
+        public override void Inventory()
+        {
+            List<string> beslagtaget = new List<string>();
+        }
 
     }
 
@@ -47,11 +63,14 @@ namespace TjuvochPolis
     {
         public bool IsThief { get; set; }
 
-        public Thief(bool IsThief, string name, int[] location, int[] direction) : base (name, location, direction)
+        public Thief(bool IsThief, string name, int[] location, int[] direction) : base ( name, location, direction)
         {
 
         }
-
+        public override void Inventory()
+        {
+            List<string> stöldgods = new List<string>();
+        }
 
     }
 
