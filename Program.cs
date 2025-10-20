@@ -40,69 +40,17 @@ namespace TjuvochPolis
                 persons.Add(new Thief(true, name, location, direction));
             }
 
-            foreach (Person person in persons)
-            {
-                if (person is Thief)
-                {
-                    
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("T " + person.Name + " ");
-                    foreach (int location in person.Location)
-                    {
-                        Console.Write(location + " ");
-                    }
-                    Console.Write(',');
-                    foreach (int direction in person.Direction)
-                    {
-                        Console.Write(direction + " ");
-                    }
-                    Console.ResetColor();
-                }
-                else if (person is Cop)
-                {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write("P " + person.Name + " ");
-                    foreach (int location in person.Location)
-                    {
-                        Console.Write(location + " ");
-                    }
-                    Console.Write(',');
-                    foreach (int direction in person.Direction)
-                    {
-                        Console.Write(direction + " ");
-                    }
-                    Console.ResetColor();
-                }
-                else if (person is Citizen)
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write("C " + person.Name + " " );
-                    foreach (int location in person.Location)
-                    {
-                        Console.Write(location + " ");
-                    }
-                    Console.Write(",");
-                    foreach (int direction in person.Direction)
-                    {
-                        Console.Write(direction + " ");
-                    }
-                    Console.ResetColor();
-                }
-                Console.WriteLine();
-            }
+
+            
             //string[] names = { };
             //City.CityRoofFloor();
             //Console.WriteLine();
-            City.Streets();
+            City.Streets(persons);
             Console.WriteLine();
             Console.WriteLine();
-<<<<<<< HEAD
-=======
             City.Prison();
->>>>>>> 24a727114b701eff41203a05a9f25705e4ca87f0
-            //City.CityRoofFloor();
-            City.Prison();
-            
+            Console.WriteLine();
+            Developer.DeveloperMode(persons);
 
             
 

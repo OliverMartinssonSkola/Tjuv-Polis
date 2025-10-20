@@ -17,7 +17,6 @@ namespace TjuvochPolis
             Location = location;
             Direction = direction;
         
-            
         }
         public virtual void Inventory()
         {
@@ -28,19 +27,21 @@ namespace TjuvochPolis
     class Citizen:Person
     {
         public bool IsCitizen { get; set; }
+        
+
         public Citizen(bool IsCitizens, string name, int[] location, int[] direction) : base(name, location, direction)
         {
             
         }
-        public override void Inventory()
-        {
+        //public override void Inventory()
+        //{
             
-            List<string> belongings = new List<string>();
-            belongings.Add("Plånbok");
-            belongings.Add("Klocka");
-            belongings.Add("Nycklar");
-            belongings.Add("Mobiltelefon");
-        }
+        //    List<string> belongings = new List<string>();
+        //    belongings.Add("Plånbok");
+        //    belongings.Add("Klocka");
+        //    belongings.Add("Nycklar");
+        //    belongings.Add("Mobiltelefon");
+        //}
     }
 
     class Cop:Person
