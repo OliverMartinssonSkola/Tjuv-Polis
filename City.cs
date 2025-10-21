@@ -21,61 +21,72 @@ namespace TjuvochPolis
         //}
         public static void Streets(List<Person>persons)
         {
-            
-            for (int i = 0; i < 102; i++)
+            while (true)
             {
-                  Console.Write('#');
-            }
-
-            
-            Console.WriteLine();
-            for (int row = 0; row < Program.streets.GetLength(0); row++)
-            {
-                Console.Write('#');
-                for (int col = 0; col < Program.streets.GetLength(1); col++)
-                {
-                    foreach(Person person in persons)
-                    {
-                        //if ((person.Location[0] == row) && (person.Location[1] == col))
-                        {
-
-                            if (person is Citizen && (person.Location[0] == row) && (person.Location[1] == col))
-                            {
-                                Console.Write('M');
-                            }
-                            else if (person is Cop && (person.Location[0] == row) && (person.Location[1] == col))
-                            {
-                                Console.Write('P');
-                            }
-                            else if (person is Thief && (person.Location[0] == row) && (person.Location[1] == col))
-                            {
-                                Console.Write('T');
-                            }
-                            else 
-                            {
-                            Console.Write(Program.streets[row,col]== '\0');
-                            }
-                            
-                        }
-                        
-
-
-                    }
-                    
-                  
-                }
-                Console.Write('#');
-                Console.WriteLine();
-            }
-            {
+                Console.Clear();
                 for (int i = 0; i < 102; i++)
                 {
                     Console.Write('#');
                 }
 
+
+                Console.WriteLine();
+                for (int row = 0; row < Program.streets.GetLength(0); row++)
+                {
+                    Console.Write('#');
+                    for (int col = 0; col < Program.streets.GetLength(1); col++)
+                    {
+                        //if (Program.streets[row, col] == '\0')
+                        //{
+                            Console.ResetColor();
+                            Program.streets[row, col] = ' ';
+
+                        //}
+
+                        foreach (Person person in persons)
+                        {
+                            if ((person.Location[0] == row) && (person.Location[1] == col))
+                            {
+
+                                if (person is Citizen && (person.Location[0] == row) && (person.Location[1] == col))
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Program.streets[row, col] = 'C';
+                                }
+                                else if (person is Cop && (person.Location[0] == row) && (person.Location[1] == col))
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                    Program.streets[row, col] = 'P';
+                                }
+                                else if (person is Thief && (person.Location[0] == row) && (person.Location[1] == col))
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Program.streets[row, col] = 'T';
+                                }
+                            }
+
+
+                        }
+                        Console.Write(Program.streets[row, col]);
+
+
+                    }
+                    Console.Write('#');
+                    Console.WriteLine();
+                    
+                }
+                {
+                    for (int i = 0; i < 102; i++)
+                    {
+                        Console.ResetColor();
+                        Console.Write('#');
+                    }
+
+                }
+                Movement.CityMovement(persons);
+                Thread.Sleep(1000);
             }
-
-
+            
         }
 
         public static void Prison()

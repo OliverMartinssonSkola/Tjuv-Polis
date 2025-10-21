@@ -42,16 +42,19 @@ namespace TjuvochPolis
 
 
             
-            //string[] names = { };
-            //City.CityRoofFloor();
-            //Console.WriteLine();
-            City.Streets(persons);
-            Console.WriteLine();
-            Console.WriteLine();
-            City.Prison();
-            Console.WriteLine();
-            Developer.DeveloperMode(persons);
-
+            
+                
+                //string[] names = { };
+                //City.CityRoofFloor();
+                //Console.WriteLine();
+                City.Streets(persons);
+                Console.WriteLine();
+                Console.WriteLine();
+                City.Prison();
+                Console.WriteLine();
+                Developer.DeveloperMode(persons);
+                
+            
             
 
         }
