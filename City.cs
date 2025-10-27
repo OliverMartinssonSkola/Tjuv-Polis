@@ -11,14 +11,6 @@ namespace TjuvochPolis
     internal class City
     {
 
-        //public static void CityRoofFloor()
-        //{
-        //    for (int i = 0; i < 102; i++)
-        //    {
-        //        Console.Write('#');
-        //    }
-
-        //}
         public static void Streets(List<Person>persons)
         {
             while (true)
@@ -28,7 +20,6 @@ namespace TjuvochPolis
                 {
                     Console.Write('#');
                 }
-
 
                 Console.WriteLine();
                 for (int row = 0; row < Program.streets.GetLength(0); row++)
@@ -63,11 +54,13 @@ namespace TjuvochPolis
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Program.streets[row, col] = 'T';
                                 }
+                                
                             }
 
-
                         }
+                        
                         Console.Write(Program.streets[row, col]);
+                        Console.ResetColor();
 
 
                     }
@@ -75,18 +68,19 @@ namespace TjuvochPolis
                     Console.WriteLine();
                     
                 }
-                {
+                
                     for (int i = 0; i < 102; i++)
                     {
-                        Console.ResetColor();
+                        
                         Console.Write('#');
                     }
 
-                }
+                
                 Movement.CityMovement(persons);
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
             }
             
+
         }
 
         public static void Prison()

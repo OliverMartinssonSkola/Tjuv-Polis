@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System.ComponentModel;
+using System.Data.Common;
 
 namespace TjuvochPolis
 {
@@ -21,32 +22,43 @@ namespace TjuvochPolis
             for (int i = 0; i < 30; i++)
             {
                 string name = firstName[rnd.Next(firstName.Length)];
-                int[] location = new int[] { (rnd.Next(0, streets.GetLength(0))), (rnd.Next(0, streets.GetLength(1)))};
-                int[] direction = { (rnd.Next(-1, 2)), (rnd.Next(-1, 2)) };
+                int[] direction = {0,0};
+                int[] location = { (rnd.Next(0, streets.GetLength(0))), (rnd.Next(0, streets.GetLength(1)))};
+                while (direction[0]==0 && direction[1] == 0)
+                {
+                    direction[0] = rnd.Next(-1, 2);
+                    direction[1]=rnd.Next(-1, 2);
+                }
                 persons.Add(new Citizen(true, name, location, direction));
             }
             for (int i = 0; i < 10; i++)
             {
                 string name = firstName[rnd.Next(firstName.Length)];
-                int[] location = new int[] { (rnd.Next(0, streets.GetLength(0))), (rnd.Next(0, streets.GetLength(1))) };
-                int[] direction = { (rnd.Next(-1, 2)), (rnd.Next(-1, 2)) };
+                int[] direction = { 0, 0 };
+                int[] location = { (rnd.Next(0, streets.GetLength(0))), (rnd.Next(0, streets.GetLength(1))) };
+                while (direction[0] == 0 && direction[1] == 0)
+                {
+                    direction[0] = rnd.Next(-1, 2);
+                    direction[1] = rnd.Next(-1, 2);
+                }
+
                 persons.Add(new Cop(true, name, location, direction));
             }
             for(int i = 0;i < 20;i++)
             {
                 string name = firstName[rnd.Next(firstName.Length)];
-                int[] location = new int[] { (rnd.Next(0, streets.GetLength(0))), (rnd.Next(0, streets.GetLength(1))) };
-                int[] direction = { (rnd.Next(-1, 2)), (rnd.Next(-1, 2)) };
+                int[] direction = { 0, 0 };
+                int[] location = { (rnd.Next(0, streets.GetLength(0))), (rnd.Next(0, streets.GetLength(1))) };
+                while (direction[0] == 0 && direction[1] == 0)
+                {
+                    direction[0] = rnd.Next(-1, 2);
+                    direction[1] = rnd.Next(-1, 2);
+                }
                 persons.Add(new Thief(true, name, location, direction));
             }
 
+  
 
-            
-            
-                
-                //string[] names = { };
-                //City.CityRoofFloor();
-                //Console.WriteLine();
                 City.Streets(persons);
                 Console.WriteLine();
                 Console.WriteLine();
