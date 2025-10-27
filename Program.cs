@@ -24,12 +24,18 @@ namespace TjuvochPolis
                 string name = firstName[rnd.Next(firstName.Length)];
                 int[] direction = {0,0};
                 int[] location = { (rnd.Next(0, streets.GetLength(0))), (rnd.Next(0, streets.GetLength(1)))};
+                List<string> belongings = new List<string>();
+                belongings.Add("Plånbok");
+                belongings.Add("Klocka");
+                belongings.Add("Nycklar");
+                belongings.Add("Mobiltelefon");
                 while (direction[0]==0 && direction[1] == 0)
                 {
                     direction[0] = rnd.Next(-1, 2);
                     direction[1]=rnd.Next(-1, 2);
                 }
-                persons.Add(new Citizen(true, name, location, direction));
+                persons.Add(new Citizen(true, name, location, direction, belongings));
+                
             }
             for (int i = 0; i < 10; i++)
             {
