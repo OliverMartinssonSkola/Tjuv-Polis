@@ -8,9 +8,9 @@ namespace TjuvochPolis
 {
     internal class Movement
     {
-        public static void CityMovement(List<Person> persons)
+        public static void CityMovement(List<Person> people)
         {
-            foreach (Person person in persons)
+            foreach (Person person in people)
             {
                 person.Location[0] += person.Direction[0];
                 if (person.Location[0] < 0)

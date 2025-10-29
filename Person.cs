@@ -6,54 +6,56 @@ using System.Threading.Tasks;
 
 namespace TjuvochPolis
 {
+    
     internal class Person
     {
         public string Name { get; set; }
         public int[] Location { get; set; }
         public int[] Direction { get; set; }
+        
         public Person(string name, int[] location, int[] direction)
         {
             Name = name;
             Location = location;
             Direction = direction;
-        
+            
+
         }
         public virtual void Inventory()
         {
-            List<string> list = new List<string>();
-        }
+            List<string> inventory =new List<string>();
+    
+       }
+        
     }
 
     class Citizen:Person
     {
-        public bool IsCitizen { get; set; }
-        
+       
+        public List<string> Belongings= new List<string>();
 
-        public Citizen(bool IsCitizens, string name, int[] location, int[] direction) : base(name, location, direction)
+        public Citizen( string name, int[] location, int[] direction, List <string> belongings) : base(name, location, direction)
         {
-            
+            Belongings = belongings;
         }
-        //public override void Inventory()
-        //{
-            
-        //    List<string> belongings = new List<string>();
-        //    belongings.Add("Plånbok");
-        //    belongings.Add("Klocka");
-        //    belongings.Add("Nycklar");
-        //    belongings.Add("Mobiltelefon");
-        //}
+        public override void Inventory()
+        {
+            List <string>belongings= new List<string>();
+
+        }
     }
 
     class Cop:Person
     {
-        public bool IsCop {  get; set; }
+        
+        public List <string> Beslagtaget { get; set; }
 
-        public Cop(bool IsCop, string name, int[] location, int[] direction) : base(name, location, direction)
+        public Cop( string name, int[] location, int[] direction, List <string> beslagtaget) : base(name, location, direction)
         {
-
+            Beslagtaget = beslagtaget;
 
         }
-        public override void Inventory()
+        public  void beslagtaget()
         {
             List<string> beslagtaget = new List<string>();
         }
@@ -62,13 +64,14 @@ namespace TjuvochPolis
 
     class Thief:Person
     {
-        public bool IsThief { get; set; }
+        
+        public List <string> Stöldgods { get; set; }
 
-        public Thief(bool IsThief, string name, int[] location, int[] direction) : base ( name, location, direction)
+        public Thief( string name, int[] location, int[] direction, List <string> stöldgods) : base ( name, location, direction)
         {
-
+            Stöldgods = stöldgods;
         }
-        public override void Inventory()
+        public void stöldgods()
         {
             List<string> stöldgods = new List<string>();
         }

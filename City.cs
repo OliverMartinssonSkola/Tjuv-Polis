@@ -11,7 +11,7 @@ namespace TjuvochPolis
     internal class City
     {
 
-        public static void Streets(List<Person>persons)
+        public static void Streets(List<Person>people)
         {
             while (true)
             {
@@ -34,7 +34,7 @@ namespace TjuvochPolis
 
                         //}
 
-                        foreach (Person person in persons)
+                        foreach (Person person in people)
                         {
                             if ((person.Location[0] == row) && (person.Location[1] == col))
                             {
@@ -76,8 +76,9 @@ namespace TjuvochPolis
                     }
 
                 
-                Movement.CityMovement(persons);
+                Movement.CityMovement(people);
                 Thread.Sleep(500);
+                Developer.Interaction(people);
             }
             
 
