@@ -13,9 +13,9 @@ namespace TjuvochPolis
 
         public static void Streets(List<Person>people)
         {
-            while (true)
+            //while (true)
             {
-                Console.Clear();
+                
                 for (int i = 0; i < 102; i++)
                 {
                     Console.Write('#');

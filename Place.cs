@@ -14,7 +14,7 @@ namespace TjuvochPolis
 
         public static void Streets(List<Person> people)
         {
-
+            //bool running =true;
             int width = 100;//larghezza
             int height = 25; // altezza
 
@@ -40,9 +40,12 @@ namespace TjuvochPolis
                 Console.SetCursorPosition(i, height);
                 Console.Write('#');
             }
-            
-            while (true)
-            {
+
+            //while (running)
+            //{
+
+
+
 
                 foreach (Person person in people) // först en tom array
                 {
@@ -56,8 +59,8 @@ namespace TjuvochPolis
                 }
 
                 Movement.CityMovement(people); // rörelsens metod
-             
-                
+
+
 
                 foreach (Person person in people) // sätta personerna i arrayen
                 {
@@ -83,12 +86,23 @@ namespace TjuvochPolis
 
                     }
                 }
+                    //if (Console.KeyAvailable)
+                    //{
+                    //    ConsoleKeyInfo key = Console.ReadKey();
+                    //    if (key.Key == ConsoleKey.Escape)
+                    //    {
+                    //    running = false;
+                    //    }
+
+
+                    //}
+
+                    Thread.Sleep(500);
+
+
+
                 
-                Thread.Sleep(500);
-            }
-            
-
-
+            //}
         }
     }
 }
