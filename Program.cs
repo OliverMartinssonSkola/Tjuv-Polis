@@ -65,13 +65,15 @@ namespace TjuvochPolis
 
   
 
-         //  City.Streets(people);
+                //City.Streets(people);
                 //Console.WriteLine();
                 //Console.WriteLine();
                 //City.Prison();
                 //Console.WriteLine();
-               // Developer.DeveloperMode(people);
-              Place.Streets(people);
+                //Developer.DeveloperMode(people);
+                Place.Streets(people);
+            
+              
             
 
                 

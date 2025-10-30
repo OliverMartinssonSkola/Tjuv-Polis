@@ -18,6 +18,7 @@ namespace TjuvochPolis
             int width = 100;//larghezza
             int height = 25; // altezza
 
+            // rita kanterna
             for (int i = 0; i <= width; i++) // taket
             {
                 Console.SetCursorPosition(i, 0);
@@ -39,43 +40,43 @@ namespace TjuvochPolis
                 Console.SetCursorPosition(i, height);
                 Console.Write('#');
             }
-            Program.streets = new char[height + 1, width + 1]; // tom array
+           
 
             while (true)
             {
 
-                foreach (Person person in people)
+                foreach (Person person in people) // först en tom array
                 {
 
-                    if (person.Location[0] > 0 && person.Location[0] < height && person.Location[1] > 0 && person.Location[1] < width)
+                    if (person.Location[0] > 0 && person.Location[0] < height && person.Location[1] > 0 && person.Location[1] < width) // gränser
                     {
-                        Console.SetCursorPosition(person.Location[1], person.Location[0]);
+                        Console.SetCursorPosition(person.Location[1], person.Location[0]); // gå till positionen
 
-                        Console.Write(' ');
+                        Console.Write(' '); // rita en tom char
                     }
                 }
 
-                Movement.CityMovement(people); // rörelse
+                Movement.CityMovement(people); // rörelsens metod
 
-                foreach (Person person in people)
+                foreach (Person person in people) // sätta personerna i arrayen
                 {
-                    if (person.Location[0] > 0 && person.Location[0] < height && person.Location[1] > 0 && person.Location[1] < width)
+                    if (person.Location[0] > 0 && person.Location[0] < height && person.Location[1] > 0 && person.Location[1] < width) // gränser
                     {
-                        Console.SetCursorPosition(person.Location[1], person.Location[0]);
+                        Console.SetCursorPosition(person.Location[1], person.Location[0]); // gå til positionen och ...
                         if (person is Citizen)
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.Write('C');
+                            Console.Write('M'); // medborgarna
                         }
                         else if (person is Cop)
                         {
                             Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.Write('P');
+                            Console.Write('P'); // polis
                         }
                         else if (person is Thief)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.Write('T');
+                            Console.Write('T'); // tjuvarna
                         }
                         Console.ResetColor();
 
@@ -83,6 +84,7 @@ namespace TjuvochPolis
                 }
                 Thread.Sleep(500);
             }
+
         }
     }
 }

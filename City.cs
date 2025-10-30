@@ -77,8 +77,7 @@ namespace TjuvochPolis
 
                 
                 Movement.CityMovement(people);
-                Thread.Sleep(500);
-                Developer.Interaction(people);
+                
             }
             
 
