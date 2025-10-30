@@ -10,36 +10,15 @@ namespace TjuvochPolis
         
         static void Main(string[] args)
         {
-            
+            bool running = true;
+            bool vy = true;
             //Console.SetBufferSize(Console.BufferWidth, 200);
             //Console.SetBufferSize(Console.BufferHeight, 200);
             Console.CursorVisible = false;
 
             List<Person> people = new List<Person>();
             Helpers.CitienCreator(people);
-            bool vy = true;
-
-            //while (true)
-            //{
-            //    Console.Clear();
-
-            //    if (vy)
-
-            //        Place.Streets(people);
-            //    else
-            //        Developer.DeveloperMode(people);
-
-            //    ConsoleKeyInfo key = Console.ReadKey(true);
-
-            //    if (key.Key == ConsoleKey.Spacebar)
-            //    {
-            //        vy = !vy; // toggle mode
-            //    }
-            //    else if (key.Key == ConsoleKey.Escape)
-            //    {
-            //        break; // exit program
-            //    }
-            //}
+            
             //while (true)
             //{
 
@@ -71,20 +50,20 @@ namespace TjuvochPolis
             //}
             
 
-bool running = true;
+        
 
-while (running) // main program loop
-{
+        while (running) //main loop
+        {
 
-    if (vy)
-    {
-        // ---- STREET MODE LOOP ----
+        if (vy)
+        {
+        //STREET LOOP
         bool inStreets = true;
 
         while (inStreets)
         {
             Console.Clear();
-            Place.Streets(people);  // your drawing/update function
+            Place.Streets(people);  //växla till Streets
            
             if (Console.KeyAvailable)
             {
@@ -92,37 +71,37 @@ while (running) // main program loop
 
                 if (key.Key == ConsoleKey.Spacebar)
                 {
-                    vy = false;      // toggle to developer mode
-                    inStreets = false; // exit this sub-loop
+                    vy = false;      //växla till developer mode
+                    inStreets = false; //avsluta sub-loop
                 }
-                            else if (key.Key == ConsoleKey.Escape)
-                            {
-                                running = false; // exit the whole program
-                                inStreets = false;
-                            }
-                        }
+                else if (key.Key == ConsoleKey.Escape)
+                {
+                running = false; // avsluta
+                inStreets = false;
+                }
+            }
 
-            Thread.Sleep(50); // small delay for smoother updates
+            Thread.Sleep(50); // spara GPU och snyggare övergång
         }
-    }
-    else
-    {
+        }
+            else
+            {
 
-        Console.Clear();
-        Developer.DeveloperMode(people);
+            Console.Clear();
+            Developer.DeveloperMode(people);
         
 
-        ConsoleKeyInfo key = Console.ReadKey(true);
-        if (key.Key == ConsoleKey.Spacebar)
-        {
-            vy = true; // switch back to street mode
-        }
+            ConsoleKeyInfo key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.Spacebar)
+            {
+            vy = true; //växla till street
+            }
                     else if (key.Key == ConsoleKey.Escape)
                     {
-                        running = false; // exit program
+                        running = false; //avsluta
                     }
-                }
-}
+            }
+        }
 
             //City.Streets(people);
             //Console.WriteLine();

@@ -86,18 +86,16 @@ namespace TjuvochPolis
 
                     }
                 }
-                    //if (Console.KeyAvailable)
-                    //{
-                    //    ConsoleKeyInfo key = Console.ReadKey();
-                    //    if (key.Key == ConsoleKey.Escape)
-                    //    {
-                    //    running = false;
-                    //    }
+            //if (Console.KeyAvailable)
+            //{
+            //    ConsoleKeyInfo key = Console.ReadKey();
+            //    if (key.Key == ConsoleKey.Escape)
+            //    {
+            //        running = false;
+            //    }
+            //}
 
-
-                    //}
-
-                    Thread.Sleep(500);
+            Thread.Sleep(500);
 
 
 
