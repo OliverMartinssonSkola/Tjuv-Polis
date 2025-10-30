@@ -8,20 +8,57 @@ namespace TjuvochPolis
 {
     internal class Helpers
     { 
-        public static void Run(List<Person>people)
+        public static void CitienCreator(List<Person>people)
         {
-            bool run = true;
-            while(run)
+            
+            Random rnd = new Random();
+            string[] firstName = new string[]
             {
-                Place.Streets(people);
-                ConsoleKeyInfo key = Console.ReadKey();
-                if (key.Key == ConsoleKey.Spacebar)
-                {
+                "Alen", "Alice", "Alina", "Amadeus", "Alex", "Alexandra", "Anton", "Bakr", "David", "Dzelila",
+                "Edin", "Erik", "Filip", "Hamed", "Hussein", "Isak", "Jakob", "Johan", "Johan", "Joel",
+                "Jonas", "Julia", "Kristofer", "Mikael T", "Mikael S", "Nemer", "Oliver M", "Oliver L", "Oscar", "Patrik",
+                "Qudsia", "Ramoee", "Robin", "Tobias", "Wafae", "Yevheniia"
+            };
 
-                    Console.Clear();
-                    run = false;
-                    
+            for (int i = 0; i < 30; i++)
+            {
+                string name = firstName[rnd.Next(firstName.Length)];
+                int[] direction = { 0, 0 };
+                int[] location = { (rnd.Next(0, Program.streets.GetLength(0))), (rnd.Next(0, Program.streets.GetLength(1))) };
+                List<string> belongings = new List<string>() { "Plånbok", "Klocka", "Nycklar", "Mobiltelefon" };
+                while (direction[0] == 0 && direction[1] == 0)
+                {
+                    direction[0] = rnd.Next(-1, 2);
+                    direction[1] = rnd.Next(-1, 2);
                 }
+                people.Add(new Citizen(name, location, direction, belongings));
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                string name = firstName[rnd.Next(firstName.Length)];
+                int[] direction = { 0, 0 };
+                int[] location = { (rnd.Next(0, Program.streets.GetLength(0))), (rnd.Next(0, Program.streets.GetLength(1))) };
+                List<string> beslagtaget = new List<string>();
+                while (direction[0] == 0 && direction[1] == 0)
+                {
+                    direction[0] = rnd.Next(-1, 2);
+                    direction[1] = rnd.Next(-1, 2);
+                }
+
+                people.Add(new Cop(name, location, direction, beslagtaget));
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                string name = firstName[rnd.Next(firstName.Length)];
+                int[] direction = { 0, 0 };
+                int[] location = { (rnd.Next(0, Program.streets.GetLength(0))), (rnd.Next(0, Program.streets.GetLength(1))) };
+                List<string> stöldgods = new List<string>();
+                while (direction[0] == 0 && direction[1] == 0)
+                {
+                    direction[0] = rnd.Next(-1, 2);
+                    direction[1] = rnd.Next(-1, 2);
+                }
+                people.Add(new Thief(name, location, direction, stöldgods));
             }
         }
         public static void Interaction(List<Person> people)
