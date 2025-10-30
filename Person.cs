@@ -55,7 +55,7 @@ namespace TjuvochPolis
             Beslagtaget = beslagtaget;
 
         }
-        public  void beslagtaget()
+        public override void Inventory()
         {
             List<string> beslagtaget = new List<string>();
         }
@@ -71,7 +71,7 @@ namespace TjuvochPolis
         {
             Stöldgods = stöldgods;
         }
-        public void stöldgods()
+        public override void Inventory()
         {
             List<string> stöldgods = new List<string>();
         }
