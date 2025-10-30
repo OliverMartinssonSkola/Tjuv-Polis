@@ -31,18 +31,22 @@ namespace TjuvochPolis
 
     class Citizen:Person
     {
-       
-        public List<string> Belongings= new List<string>();
+        public bool IsCitizen { get; set; }
+        public List<string> Belongings = new List<string>();
 
-        public Citizen( string name, int[] location, int[] direction, List <string> belongings) : base(name, location, direction)
+        public Citizen(bool IsCitizens, string name, int[] location, int[] direction, List<string> belongings) : base(name, location, direction)
         {
             Belongings = belongings;
         }
-        public override void Inventory()
-        {
-            List <string>belongings= new List<string>();
-
-        }
+        //public override void Inventory()
+        //{
+            
+        //   List<string> belongings = new List<string>();
+        //   belongings.Add("Plånbok");
+        //   belongings.Add("Klocka");
+        //   belongings.Add("Nycklar");
+        //   belongings.Add("Mobiltelefon");
+        //}
     }
 
     class Cop:Person

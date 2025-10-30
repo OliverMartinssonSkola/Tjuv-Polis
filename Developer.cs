@@ -57,13 +57,8 @@ namespace TjuvochPolis
                     {
                         Console.Write(direction + " ");
                     }
-                    Console.WriteLine(",");
-                    foreach(string item in citizen.Belongings)
-                    {
-                        Console.Write(item);
-                        Console.Write(" ");
-                    }
-
+                    foreach (string item in Citizen.Belongings)
+                    {  Console.Write(item + " "); }
                     Console.ResetColor();
                 }
                 Console.WriteLine();
