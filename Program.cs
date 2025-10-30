@@ -63,22 +63,22 @@ namespace TjuvochPolis
                 people.Add(new Thief( name, location, direction, stöldgods));
             }
 
-  
 
-                //City.Streets(people);
-                //Console.WriteLine();
-                //Console.WriteLine();
-                //City.Prison();
-                //Console.WriteLine();
-                //Developer.DeveloperMode(people);
-                Place.Streets(people);
-            
-              
-            
 
-                
-            
-            
+            //City.Streets(people);
+            //Console.WriteLine();
+            //Console.WriteLine();
+            //City.Prison();
+            //Console.WriteLine();
+            Place.Streets(people);
+            Developer.DeveloperMode(people);
+
+
+
+
+
+
+
 
         }
     }

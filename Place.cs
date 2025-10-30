@@ -40,8 +40,7 @@ namespace TjuvochPolis
                 Console.SetCursorPosition(i, height);
                 Console.Write('#');
             }
-           
-
+            
             while (true)
             {
 
@@ -57,6 +56,8 @@ namespace TjuvochPolis
                 }
 
                 Movement.CityMovement(people); // rörelsens metod
+             
+                
 
                 foreach (Person person in people) // sätta personerna i arrayen
                 {
@@ -82,8 +83,11 @@ namespace TjuvochPolis
 
                     }
                 }
+                
                 Thread.Sleep(500);
             }
+            
+
 
         }
     }
