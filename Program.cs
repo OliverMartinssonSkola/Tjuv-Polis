@@ -6,13 +6,13 @@ namespace TjuvochPolis
     internal class Program
     {
         public static char[,] streets = new char[26, 101];
-        public static char[,] prison = new char[10, 20];
+        public static char[,] prison = new char[7, 20];
         public static bool happening = false;
         static void Main(string[] args)
         {
             bool running = true;
             bool vy = true;
-            Console.SetBufferSize(120,120);
+            Console.SetBufferSize(150,120);
             Console.SetWindowSize(120,35); //Gör inget om man kör med poweshell
 
             Console.CursorVisible = false;
@@ -65,7 +65,7 @@ namespace TjuvochPolis
         while (inStreets)
         {
         
-        Place.Streets(people);  //växla till Streets
+        Place.Streets(people, prisoners);  //växla till Streets
         Place.Prison(prisoners);
         if (Console.KeyAvailable)
             {

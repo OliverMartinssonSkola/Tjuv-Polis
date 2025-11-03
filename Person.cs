@@ -64,12 +64,16 @@ namespace TjuvochPolis
 
     class Thief:Person
     {
-        
+        public bool InPrison { get; set; } = false;
+        public int[] PrisonLocation { get; set; }
+
         public List <string> Stöldgods { get; set; }
 
-        public Thief( string name, int[] location, int[] direction, List <string> stöldgods) : base ( name, location, direction)
+        public Thief( string name, int[] location, int[] direction, List <string> stöldgods, bool inPrison, int[] prisonLocation) : base ( name, location, direction)
         {
             Stöldgods = stöldgods;
+            InPrison = inPrison;
+            PrisonLocation = prisonLocation;
         }
         public override void Inventory()
         {

@@ -33,5 +33,32 @@ namespace TjuvochPolis
             }
             
         }
+        public static void PrisonMovement(List<Person>people)
+        {
+            foreach(Person person in people)
+            {
+                if (person is Thief)
+                {
+                    person.Location[0] += person.Direction[0];
+                    if (person.Location[0] < 0)
+                    {
+                        person.Location[0] = Program.prison.GetLength(0) - 1;
+                    }
+                    else if (person.Location[0] >= Program.prison.GetLength(0))
+                    {
+                        person.Location[0] = 0;
+                    }
+                    person.Location[1] += person.Direction[1];
+                    if (person.Location[1] < 0)
+                    {
+                        person.Location[1] = Program.prison.GetLength(1) - 1;
+                    }
+                    else if (person.Location[1] >= Program.prison.GetLength(1))
+                    {
+                        person.Location[1] = 0;
+                    }
+                }
+            }
+        }
     }
 }

@@ -56,15 +56,17 @@ namespace TjuvochPolis
                 int[] direction = { 0, 0 };
                 int[] location = { (rnd.Next(0, Program.streets.GetLength(0))), (rnd.Next(0, Program.streets.GetLength(1))) };
                 List<string> stöldgods = new List<string>();
+                bool inPrison = false;
+                int[] prisonLocation = { (rnd.Next(0, Program.prison.GetLength(0))), (rnd.Next(0, Program.prison.GetLength(1)))};
                 while (direction[0] == 0 && direction[1] == 0)
                 {
                     direction[0] = rnd.Next(-1, 2);
                     direction[1] = rnd.Next(-1, 2);
                 }
-                people.Add(new Thief(name, location, direction, stöldgods));
+                people.Add(new Thief(name, location, direction, stöldgods, inPrison, prisonLocation));
             }
         }
-        public static void Interaction(List<Person> people)
+        public static void Interaction(List<Person> people, List<Person>prisoners)
         {
             
             foreach (var person1 in people)
@@ -93,7 +95,7 @@ namespace TjuvochPolis
                             }
                             else
                             {
-                                interactions.Add(person1.Name + "s fickor var tomma och " + person2.Name + " blir sur!!!");
+                                interactions.Add("Medborgaren " + person1.Name + "s fickor var tomma och tjuven " + person2.Name + " blir sur!!!");
                                 //Program.happening = true;
                             }
 
@@ -105,8 +107,13 @@ namespace TjuvochPolis
                                 cop2.Beslagtaget.AddRange(thief2.Stöldgods); // lägga alla grejer i polisens iventory
                                 thief2.Stöldgods.Clear(); // tomma tjuvens inventory
                                 interactions.Add("Polisen " + person1.Name + " griper tjuven " + person2.Name + " och beslagtar alla stulna saker.");
-                                
+                                prisoners.Add(thief2 as Thief);
+                               // people.Remove(thief2);
                                 //Program.happening=true;
+                            }
+                            else
+                            {
+                                interactions.Add("Polisen "+ person1.Name + " möter tjuven "+ person2.Name + " och säger: \"jag håller ögonen på dig!!\"");
                             }
 
 
@@ -132,22 +139,38 @@ namespace TjuvochPolis
                 Console.WriteLine(interaction);
                 x++;
             }
+            
+        }
+
+        public static void PrisonersList(List<Person>prisoners)
+        {
+
+            int x = 0;
+
+
+            foreach (var prisoner in prisoners)
+            {
+                Console.SetCursorPosition(105, x);
+                Console.WriteLine(prisoners.Index +prisoner.Name );
+                x++;
+            }
 
         }
-        //        public static (string name, int[]location, int[]direction) CreatePersons (Random rnd, string[]firstName, char[,] streets)
-        //        {
-        //            string name = firstName[rnd.Next(firstName.Length)];
-        //            int[] location = { rnd.Next(0, streets.GetLength(0)), rnd.Next(0, streets.GetLength(1)) };
-        //            int[] direction = { 0, 0 };
+    
+    //        public static (string name, int[]location, int[]direction) CreatePersons (Random rnd, string[]firstName, char[,] streets)
+    //        {
+    //            string name = firstName[rnd.Next(firstName.Length)];
+    //            int[] location = { rnd.Next(0, streets.GetLength(0)), rnd.Next(0, streets.GetLength(1)) };
+    //            int[] direction = { 0, 0 };
 
-        //            while (direction[0] == 0 && direction[1]==0)
-        //            {
-        //                direction[0] = rnd.Next(-1, 2);
-        //                direction[1] = rnd.Next(-1, 2);
-        //            }
+    //            while (direction[0] == 0 && direction[1]==0)
+    //            {
+    //                direction[0] = rnd.Next(-1, 2);
+    //                direction[1] = rnd.Next(-1, 2);
+    //            }
 
 
-        //            return (name, location, direction);
-        //        }
-    }
+    //            return (name, location, direction);
+    //        }
+}
 }

@@ -12,7 +12,7 @@ namespace TjuvochPolis
     internal class Place
     {
 
-        public static void Streets(List<Person> people)
+        public static void Streets(List<Person> people, List<Person>prisoners)
         {
             //bool running =true;
             int width = 100;
@@ -58,7 +58,8 @@ namespace TjuvochPolis
                 }
 
                 Movement.CityMovement(people); // rörelsens metod
-                Helpers.Interaction(people);
+                Helpers.Interaction(people, prisoners);
+                Movement.PrisonMovement(people);
 
 
 
@@ -130,6 +131,7 @@ namespace TjuvochPolis
                 Console.SetCursorPosition(i, height+27);
                 Console.Write('#');
             }
+
         }
     }
 }
