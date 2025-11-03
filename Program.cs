@@ -7,16 +7,18 @@ namespace TjuvochPolis
     {
         public static char[,] streets = new char[26, 101];
         public static char[,] prison = new char[10, 20];
-        
+        public static bool happening = false;
         static void Main(string[] args)
         {
             bool running = true;
             bool vy = true;
-            //Console.SetBufferSize(Console.BufferWidth, 200);
-            //Console.SetBufferSize(Console.BufferHeight, 200);
+            Console.SetBufferSize(120,120);
+            Console.SetWindowSize(120,35); //Gör inget om man kör med poweshell
+
             Console.CursorVisible = false;
 
             List<Person> people = new List<Person>();
+            List<Person> prisoners = new List<Person>();
             Helpers.CitienCreator(people);
             
             //while (true)
@@ -59,18 +61,19 @@ namespace TjuvochPolis
         {
         //STREET LOOP
         bool inStreets = true;
-
+        bool interactionsVisible = false;
         while (inStreets)
         {
-            Console.Clear();
-            Place.Streets(people);  //växla till Streets
-           
-            if (Console.KeyAvailable)
+        
+        Place.Streets(people);  //växla till Streets
+        Place.Prison(prisoners);
+        if (Console.KeyAvailable)
             {
                 ConsoleKeyInfo key = Console.ReadKey(true);
 
                 if (key.Key == ConsoleKey.Spacebar)
                 {
+                    //Console.Write("\u001bc\x1b[3J");
                     vy = false;      //växla till developer mode
                     inStreets = false; //avsluta sub-loop
                 }
@@ -80,21 +83,34 @@ namespace TjuvochPolis
                 inStreets = false;
                 }
             }
+                        //if (happening)
+                        {
+                            //Console.Write("\u001bc\x1b[3J");
+                            //Console.SetCursorPosition(0, 27);
+                            Helpers.InteractionList();
+                            happening = false;
+                            interactionsVisible = true;
+                        }
+                        //else if (interactionsVisible)
+                        {
+                            Helpers.InteractionList();
+                        }
+                            Thread.Sleep(50); // spara GPU och snyggare övergång
+                
+                    }
 
-            Thread.Sleep(50); // spara GPU och snyggare övergång
-        }
-        }
+                }
+        
             else
             {
-
             Console.Clear();
+            //Console.Write("\u001bc\x1b[3J");
             Developer.DeveloperMode(people);
-        
-
             ConsoleKeyInfo key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.Spacebar)
             {
-            vy = true; //växla till street
+                        Console.Write("\u001bc\x1b[3J");
+                        vy = true; //växla till street
             }
                     else if (key.Key == ConsoleKey.Escape)
                     {
@@ -102,7 +118,8 @@ namespace TjuvochPolis
                     }
             }
         }
-
+        
+            
             //City.Streets(people);
             //Console.WriteLine();
             //Console.WriteLine();

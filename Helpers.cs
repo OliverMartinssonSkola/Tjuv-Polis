@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TjuvochPolis
 {
     internal class Helpers
-    { 
-        public static void CitienCreator(List<Person>people)
+    {
+        public static List<string> interactions = new List<string>();
+        
+        public static void CitienCreator(List<Person> people)
         {
-            
             Random rnd = new Random();
             string[] firstName = new string[]
             {
@@ -32,6 +34,7 @@ namespace TjuvochPolis
                     direction[1] = rnd.Next(-1, 2);
                 }
                 people.Add(new Citizen(name, location, direction, belongings));
+
             }
             for (int i = 0; i < 10; i++)
             {
@@ -63,6 +66,7 @@ namespace TjuvochPolis
         }
         public static void Interaction(List<Person> people)
         {
+            
             foreach (var person1 in people)
             {
                 foreach (var person2 in people) // två personer som träffas
@@ -71,23 +75,26 @@ namespace TjuvochPolis
                     {
                         if (person1 is Citizen citizen1 && person2 is Cop cop1)
                         {
-                            Console.WriteLine("Medborgaren " + person1.Name + " träffar polisen " + person2.Name + ", och hälsar på varandra.");
+                            interactions.Add("Medborgaren " + person1.Name + " träffar polisen " + person2.Name + ", och hälsar på varandra.");
+                            //Program.happening=true;
                         }
 
                         if (person1 is Citizen citizen2 && person2 is Thief thief1)
                         {
-                            if (citizen2.Belongings != null) // om medborgaren har något
+                            if (citizen2.Belongings.Count != 0) // om medborgaren har något
                             {
                                 Random rnd = new Random();
                                 int index = rnd.Next(0, citizen2.Belongings.Count);
                                 string item = citizen2.Belongings[index];
                                 citizen2.Belongings.RemoveAt(index); // ta bort item från medborgarens inventory
                                 thief1.Stöldgods.Add(item); // lägga den i tjuvens inventory
-                                Console.WriteLine("Tjuven " + person2.Name + "rånar en " + item + " till medborgaren " + person1.Name);
+                                interactions.Add("Tjuven " + person2.Name + " rånar medborgaren " + person1.Name +  " på hens " + item);
+                                //Program.happening=true;
                             }
                             else
                             {
-                                Console.WriteLine("Medborgarens fickor var tomma och tjuven blir sur!!!");
+                                interactions.Add(person1.Name + "s fickor var tomma och " + person2.Name + " blir sur!!!");
+                                //Program.happening = true;
                             }
 
                         }
@@ -97,7 +104,9 @@ namespace TjuvochPolis
                             {
                                 cop2.Beslagtaget.AddRange(thief2.Stöldgods); // lägga alla grejer i polisens iventory
                                 thief2.Stöldgods.Clear(); // tomma tjuvens inventory
-                                Console.WriteLine("polisen " + person1.Name + "griper tjuven " + person2.Name + " och beslagtar alla stulna saker.");
+                                interactions.Add("Polisen " + person1.Name + " griper tjuven " + person2.Name + " och beslagtar alla stulna saker.");
+                                
+                                //Program.happening=true;
                             }
 
 
@@ -110,9 +119,21 @@ namespace TjuvochPolis
 
                 }
             }
+            
+        }
+        public static void InteractionList()
+        {
+            int x = 27;
+
+
+            foreach (var interaction in interactions.TakeLast(5))
+            {
+                Console.SetCursorPosition(22, x);
+                Console.WriteLine(interaction);
+                x++;
+            }
 
         }
-
         //        public static (string name, int[]location, int[]direction) CreatePersons (Random rnd, string[]firstName, char[,] streets)
         //        {
         //            string name = firstName[rnd.Next(firstName.Length)];

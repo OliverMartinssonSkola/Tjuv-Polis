@@ -15,9 +15,8 @@ namespace TjuvochPolis
         public static void Streets(List<Person> people)
         {
             //bool running =true;
-            int width = 100;//larghezza
-            int height = 25; // altezza
-
+            int width = 100;
+            int height = 25;
             // rita kanterna
             for (int i = 0; i <= width; i++) // taket
             {
@@ -40,14 +39,14 @@ namespace TjuvochPolis
                 Console.SetCursorPosition(i, height);
                 Console.Write('#');
             }
-
+            
             //while (running)
             //{
 
 
 
 
-                foreach (Person person in people) // först en tom array
+            foreach (Person person in people) // först en tom array
                 {
 
                     if (person.Location[0] > 0 && person.Location[0] < height && person.Location[1] > 0 && person.Location[1] < width) // gränser
@@ -59,10 +58,11 @@ namespace TjuvochPolis
                 }
 
                 Movement.CityMovement(people); // rörelsens metod
+                Helpers.Interaction(people);
 
 
 
-                foreach (Person person in people) // sätta personerna i arrayen
+            foreach (Person person in people) // sätta personerna i arrayen
                 {
                     if (person.Location[0] > 0 && person.Location[0] < height && person.Location[1] > 0 && person.Location[1] < width) // gränser
                     {
@@ -96,11 +96,40 @@ namespace TjuvochPolis
             //}
 
             Thread.Sleep(500);
+            //Console.Clear();
+            Console.Write("\u001bc\x1b[3J");
 
 
 
-                
             //}
+        }
+        public static void Prison(List<Person>prisoners)
+        {
+            //bool running =true;
+            int width = 20;
+            int height = 7;
+            // rita kanterna
+            for (int i = 0; i <= width; i++) // taket
+            {
+                Console.SetCursorPosition(i, 27);
+                Console.Write('#');
+            }
+            for (int i = 27; i <= height+27; i++) // vänster vägg
+            {
+                Console.SetCursorPosition(0, i);
+                Console.Write('#');
+            }
+            for (int i = 27; i <= height+27; i++) //höger vägg
+            {
+                Console.SetCursorPosition(width, i);
+                Console.Write('#');
+            }
+
+            for (int i = 0; i <= width; i++) // golvet
+            {
+                Console.SetCursorPosition(i, height+27);
+                Console.Write('#');
+            }
         }
     }
 }
