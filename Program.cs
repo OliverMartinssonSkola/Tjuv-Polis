@@ -12,7 +12,7 @@ namespace TjuvochPolis
         {
             bool running = true;
             bool vy = true;
-            Console.SetBufferSize(150,120);
+            Console.SetBufferSize(200,200);
             Console.SetWindowSize(120,35); //Gör inget om man kör med poweshell
 
             Console.CursorVisible = false;
@@ -61,7 +61,6 @@ namespace TjuvochPolis
         {
         //STREET LOOP
         bool inStreets = true;
-        bool interactionsVisible = false;
         while (inStreets)
         {
         
@@ -84,17 +83,18 @@ namespace TjuvochPolis
                 }
             }
                         //if (happening)
-                        {
+                       // {
                             //Console.Write("\u001bc\x1b[3J");
                             //Console.SetCursorPosition(0, 27);
                             Helpers.InteractionList();
-                            happening = false;
-                            interactionsVisible = true;
-                        }
-                        //else if (interactionsVisible)
-                        {
-                            Helpers.InteractionList();
-                        }
+                            Helpers.PrisonersList(prisoners);
+                           // happening = false;
+                            //interactionsVisible = true;
+                       // }
+                        ////else if (interactionsVisible)
+                        //{
+                        //    Helpers.InteractionList();
+                        //}
                             Thread.Sleep(50); // spara GPU och snyggare övergång
                 
                     }

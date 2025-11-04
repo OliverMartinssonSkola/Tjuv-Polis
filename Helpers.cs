@@ -36,7 +36,7 @@ namespace TjuvochPolis
                 people.Add(new Citizen(name, location, direction, belongings));
 
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 30; i++)
             {
                 string name = firstName[rnd.Next(firstName.Length)];
                 int[] direction = { 0, 0 };
@@ -57,7 +57,7 @@ namespace TjuvochPolis
                 int[] location = { (rnd.Next(0, Program.streets.GetLength(0))), (rnd.Next(0, Program.streets.GetLength(1))) };
                 List<string> stöldgods = new List<string>();
                 bool inPrison = false;
-                int[] prisonLocation = { (rnd.Next(0, Program.prison.GetLength(0))), (rnd.Next(0, Program.prison.GetLength(1)))};
+                int[] prisonLocation = { (rnd.Next(28, Program.prison.GetLength(0)+27)), (rnd.Next(1, Program.prison.GetLength(1)))};
                 while (direction[0] == 0 && direction[1] == 0)
                 {
                     direction[0] = rnd.Next(-1, 2);
@@ -100,18 +100,19 @@ namespace TjuvochPolis
                             }
 
                         }
-                        else if (person1 is Cop cop2 && person2 is Thief thief2)
+                        else if (person1 is Cop cop2 && person2 is Thief thief2 && !thief2.InPrison)
                         {
-                            if (thief2.Stöldgods.Count > 0)
+                            if (thief2.Stöldgods.Count > 0 )
                             {
                                 cop2.Beslagtaget.AddRange(thief2.Stöldgods); // lägga alla grejer i polisens iventory
                                 thief2.Stöldgods.Clear(); // tomma tjuvens inventory
                                 interactions.Add("Polisen " + person1.Name + " griper tjuven " + person2.Name + " och beslagtar alla stulna saker.");
                                 prisoners.Add(thief2 as Thief);
-                               // people.Remove(thief2);
+                                thief2.InPrison = true;
+                               // people.Remove(thief2);  
                                 //Program.happening=true;
                             }
-                            else
+                            else 
                             {
                                 interactions.Add("Polisen "+ person1.Name + " möter tjuven "+ person2.Name + " och säger: \"jag håller ögonen på dig!!\"");
                             }
@@ -145,13 +146,13 @@ namespace TjuvochPolis
         public static void PrisonersList(List<Person>prisoners)
         {
 
-            int x = 0;
-
-
+            int x = 1;
+            Console.SetCursorPosition(105, 0);
+            Console.Write("Gäster i hotell \"Gripen\":");
             foreach (var prisoner in prisoners)
             {
                 Console.SetCursorPosition(105, x);
-                Console.WriteLine(prisoners.Index +prisoner.Name );
+                Console.WriteLine( "> "+ prisoner.Name );
                 x++;
             }
 

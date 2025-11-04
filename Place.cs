@@ -46,20 +46,22 @@ namespace TjuvochPolis
 
 
 
-            foreach (Person person in people) // först en tom array
-                {
+            //foreach (Person person in people) // först en tom array
+            //    {
 
-                    if (person.Location[0] > 0 && person.Location[0] < height && person.Location[1] > 0 && person.Location[1] < width) // gränser
-                    {
-                        Console.SetCursorPosition(person.Location[1], person.Location[0]); // gå till positionen
+            //        if (person.Location[0] > 0 && person.Location[0] < height && person.Location[1] > 0 && person.Location[1] < width) // gränser
+            //        {
+            //            Console.SetCursorPosition(person.Location[1], person.Location[0]); // gå till positionen
 
-                        Console.Write(' '); // rita en tom char
-                    }
-                }
+            //            Console.Write(' '); // rita en tom char
+            //        }
+            //    }
 
                 Movement.CityMovement(people); // rörelsens metod
                 Helpers.Interaction(people, prisoners);
-                Movement.PrisonMovement(people);
+                Movement.PrisonMovement(prisoners);
+
+            // prisoners istället? för att den testar redan om person is thief
 
 
 
@@ -78,7 +80,7 @@ namespace TjuvochPolis
                             Console.ForegroundColor = ConsoleColor.Blue;
                             Console.Write('P'); // polis
                         }
-                        else if (person is Thief)
+                        else if (person is Thief && ((Thief)person).InPrison== false)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write('T'); // tjuvarna
@@ -87,6 +89,7 @@ namespace TjuvochPolis
 
                     }
                 }
+
             //if (Console.KeyAvailable)
             //{
             //    ConsoleKeyInfo key = Console.ReadKey();
@@ -96,7 +99,7 @@ namespace TjuvochPolis
             //    }
             //}
 
-            Thread.Sleep(500);
+            Thread.Sleep(100);
             //Console.Clear();
             Console.Write("\u001bc\x1b[3J");
 
@@ -131,6 +134,23 @@ namespace TjuvochPolis
                 Console.SetCursorPosition(i, height+27);
                 Console.Write('#');
             }
+            
+            foreach (Thief prisoner in prisoners)
+            {
+                //if (prisoner.PrisonLocation[0] > 0 && prisoner.PrisonLocation[0] < height && prisoner.PrisonLocation[1] > 0 && prisoner.PrisonLocation[1] < width && ((Thief)prisoner).InPrison==true) // gränser
+                {
+                    Console.SetCursorPosition(prisoner.PrisonLocation[1], prisoner.PrisonLocation[0]+27); // gå til positionen och ...
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write('T'); // tjuvarna
+                    Console.ResetColor();
+
+                }
+
+            }
+            //Movement.PrisonMovement(prisoners);
+
+
+
 
         }
     }

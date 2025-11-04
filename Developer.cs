@@ -17,27 +17,36 @@ namespace TjuvochPolis
                 {
 
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("T " + person.Name + " ");
-                    foreach (int location in person.Location)
+                    if (thief.InPrison)
                     {
-                        Console.Write(location + " ");
-                    }
-                    Console.Write(',');
-                    foreach (int direction in person.Direction)
-                    {
-                        Console.Write(direction + " ");
-                    }
-                    Console.WriteLine(",");
-                    if (thief.Stöldgods.Count == 0)
-                    {
-                        Console.Write("> Har ej rånat någon ännu");
+                        Console.Write("T " + person.Name + " \n > Sitter i fängelset ");
+                        // SKAPA LISTA
                     }
                     else
                     {
-                        foreach (string item in thief.Stöldgods)
+                        Console.Write("T " + person.Name + " ");
+
+                        foreach (int location in person.Location)
                         {
-                            Console.Write(item);
-                            Console.Write(" ");
+                            Console.Write(location + " ");
+                        }
+                        Console.Write(',');
+                        foreach (int direction in person.Direction)
+                        {
+                            Console.Write(direction + " ");
+                        }
+                        Console.WriteLine(",");
+                        if (thief.Stöldgods.Count == 0)
+                        {
+                            Console.Write("> Har ej rånat någon ännu");
+                        }
+                        else
+                        {
+                            foreach (string item in thief.Stöldgods)
+                            {
+                                Console.Write(item);
+                                Console.Write(" ");
+                            }
                         }
                     }
                     Console.ResetColor();
