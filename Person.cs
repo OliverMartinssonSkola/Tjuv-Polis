@@ -21,11 +21,6 @@ namespace TjuvochPolis
             
 
         }
-        public virtual List <string> GetInventory()
-        {
-            return new List<string>();
-    
-        }
     }
 
     class Citizen:Person
@@ -36,11 +31,6 @@ namespace TjuvochPolis
         public Citizen( string name, int[] location, int[] direction, List <string> belongings) : base(name, location, direction)
         {
             Belongings = belongings;
-        }
-        public override List<string> GetInventory()
-        {
-            return Belongings;
-
         }
     }
 
@@ -54,11 +44,6 @@ namespace TjuvochPolis
             Beslagtaget = beslagtaget;
 
         }
-        public override List<string> GetInventory()
-        {
-            return Beslagtaget;
-        }
-
     }
 
     class Thief:Person
@@ -75,11 +60,6 @@ namespace TjuvochPolis
             InPrison = inPrison;
             PrisonLocation = prisonLocation;
         }
-        public override List<string> GetInventory()
-        {
-            return Stöldgods;
-        }
-
     }
 
     

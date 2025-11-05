@@ -11,10 +11,9 @@ namespace TjuvochPolis
 
     internal class Place
     {
-
         public static void Streets(List<Person> people, List<Person>prisoners)
         {
-            
+            Console.CursorVisible = false;
             int width = 100;
             int height = 25;
            
@@ -44,7 +43,7 @@ namespace TjuvochPolis
             Movement.PrisonMovement(prisoners);
             
             foreach (Person person in people) // sätta personerna i arrayen
-                {
+            {
                     if (person.Location[0] > 0 && person.Location[0] < height && person.Location[1] > 0 && person.Location[1] < width) // gränser
                     {
                         Console.SetCursorPosition(person.Location[1], person.Location[0]); // gå til positionen och ...
@@ -66,14 +65,9 @@ namespace TjuvochPolis
                         Console.ResetColor();
 
                     }
-                }
-
+            }
             Thread.Sleep(500);
-            Console.Write("\u001bc\x1b[3J");
-
-
-
-            //}
+            Console.Write("\u001bc\x1b[3J");    
         }
         public static void Prison(List<Person> prisoners)
         {
@@ -81,6 +75,10 @@ namespace TjuvochPolis
             int width = 20;
             int height = 7;
             // rita kanterna
+            Console.SetCursorPosition(0, 26);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("Fängelse:");
+            Console.ResetColor();
             for (int i = 0; i <= width; i++) // taket
             {
                 Console.SetCursorPosition(i, 27);

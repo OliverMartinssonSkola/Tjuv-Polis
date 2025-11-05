@@ -13,57 +13,28 @@ namespace TjuvochPolis
         
         public static void CitienCreator(List<Person> people)
         {
-            Random rnd = new Random();
-            string[] firstName = new string[]
-            {
-                "Alen", "Alice", "Alina", "Amadeus", "Alex", "Alexandra", "Anton", "Bakr", "David", "Dzelila",
-                "Edin", "Erik", "Filip", "Hamed", "Hussein", "Isak", "Jakob", "Johan", "Johan", "Joel",
-                "Jonas", "Julia", "Kristofer", "Mikael T", "Mikael S", "Nemer", "Oliver M", "Oliver L", "Oscar", "Patrik",
-                "Qudsia", "Ramoee", "Robin", "Tobias", "Wafae", "Yevheniia"
-            };
 
+            Random rnd = new Random();
             for (int i = 0; i < 30; i++)
             {
-                string name = firstName[rnd.Next(firstName.Length)];
-                int[] direction = { 0, 0 };
-                int[] location = { (rnd.Next(0, Program.streets.GetLength(0))), (rnd.Next(0, Program.streets.GetLength(1))) };
+                Person m = PersonCreator();
                 List<string> belongings = new List<string>() { "Plånbok", "Klocka", "Nycklar", "Mobiltelefon" };
-                while (direction[0] == 0 && direction[1] == 0)
-                {
-                    direction[0] = rnd.Next(-1, 2);
-                    direction[1] = rnd.Next(-1, 2);
-                }
-                people.Add(new Citizen(name, location, direction, belongings));
+                people.Add(new Citizen(m.Name, m.Location ,m.Direction, belongings));
 
             }
             for (int i = 0; i < 10; i++)
             {
-                string name = firstName[rnd.Next(firstName.Length)];
-                int[] direction = { 0, 0 };
-                int[] location = { (rnd.Next(0, Program.streets.GetLength(0))), (rnd.Next(0, Program.streets.GetLength(1))) };
+                Person c = PersonCreator();
                 List<string> beslagtaget = new List<string>();
-                while (direction[0] == 0 && direction[1] == 0)
-                {
-                    direction[0] = rnd.Next(-1, 2);
-                    direction[1] = rnd.Next(-1, 2);
-                }
-
-                people.Add(new Cop(name, location, direction, beslagtaget));
+                people.Add(new Cop(c.Name, c.Location, c.Direction, beslagtaget));
             }
             for (int i = 0; i < 20; i++)
             {
-                string name = firstName[rnd.Next(firstName.Length)];
-                int[] direction = { 0, 0 };
-                int[] location = { (rnd.Next(0, Program.streets.GetLength(0))), (rnd.Next(0, Program.streets.GetLength(1))) };
-                List<string> stöldgods = new List<string>();
+                Person t = PersonCreator();
                 bool inPrison = false;
                 int[] prisonLocation = { (rnd.Next(28, Program.prison.GetLength(0)+27)), (rnd.Next(1, Program.prison.GetLength(1)))};
-                while (direction[0] == 0 && direction[1] == 0)
-                {
-                    direction[0] = rnd.Next(-1, 2);
-                    direction[1] = rnd.Next(-1, 2);
-                }
-                people.Add(new Thief(name, location, direction, stöldgods, inPrison, prisonLocation));
+                List<string> stöldgods = new List<string>();
+                people.Add(new Thief(t.Name, t.Location, t.Direction, stöldgods, inPrison, prisonLocation));
             }
         }
         public static void Interaction(List<Person> people, List<Person>prisoners)
@@ -90,6 +61,8 @@ namespace TjuvochPolis
                                 citizen2.Belongings.RemoveAt(index); // ta bort item från medborgarens inventory
                                 thief1.Stöldgods.Add(item); // lägga den i tjuvens inventory
                                 interactions.Add("Tjuven " + person2.Name + " rånar medborgaren " + person1.Name +  " på hens " + item);
+                                
+                                
                             }
                             else
                             {
@@ -101,12 +74,13 @@ namespace TjuvochPolis
                         {
                             if (thief2.Stöldgods.Count > 0 )
                             {
+                                thief2.TimeInPrison = (thief2.Stöldgods.Count * 10);
                                 cop2.Beslagtaget.AddRange(thief2.Stöldgods); // lägga alla grejer i polisens iventory
                                 thief2.Stöldgods.Clear(); // tomma tjuvens inventory
                                 interactions.Add("Polisen " + person1.Name + " griper tjuven " + person2.Name + " och beslagtar alla stulna saker.");
-                                prisoners.Add(thief2 as Thief);
                                 thief2.InPrison = true;
-                                thief2.TimeInPrison = thief2.Stöldgods.Count * 3;
+                                prisoners.Add(thief2 as Thief);
+                                
                                 
                             }
                             else 
@@ -120,14 +94,17 @@ namespace TjuvochPolis
         }
         public static void InteractionList()
         {
+            Console.SetCursorPosition(22, 26);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Händelser:");
+            Console.ResetColor();
             int x = 27;
             foreach (var interaction in interactions.TakeLast(5))
             {
                 Console.SetCursorPosition(22, x);
                 Console.WriteLine(interaction);
                 x++;
-            }
-            
+            }            
         }
 
         public static void PrisonersList(List<Person>prisoners)
@@ -138,13 +115,41 @@ namespace TjuvochPolis
             Console.ForegroundColor= ConsoleColor.Red;
             Console.Write("Gäster i hotell \"GRIPEN\":");
             Console.ResetColor();
-            foreach (var prisoner in prisoners)
-            {
+            for (int y = 0; y < prisoners.Count; y++)            {
                 Console.SetCursorPosition(105, x);
-                Console.WriteLine( "> "+ prisoner.Name );
+                Console.WriteLine( "> "+ prisoners[y].Name + " " + ((Thief)prisoners[y]).TimeInPrison);
                 x++;
-            }
+                if (((Thief)prisoners[y]).TimeInPrison > 0)
+                {
+                    ((Thief)prisoners[y]).TimeInPrison--;
+                }
+                if (((Thief)prisoners[y]).TimeInPrison == 0)
+                {
 
+                    prisoners.Remove(prisoners[y]);
+                }
+            }
+        }
+        internal static Person PersonCreator()
+        {
+            Random rnd = new Random();
+            string[] firstName = new string[]
+            {
+                "Alen", "Alice", "Alina", "Amadeus", "Alex", "Alexandra", "Anton", "Bakr", "David", "Dzelila",
+                "Edin", "Erik", "Filip", "Hamed", "Hussein", "Isak", "Jakob", "Johan", "Johan", "Joel",
+                "Jonas", "Julia", "Kristofer", "Mikael T", "Mikael S", "Nemer", "Oliver M", "Oliver L", "Oscar", "Patrik",
+                "Qudsia", "Ramoee", "Robin", "Tobias", "Wafae", "Yevheniia"
+            };
+
+            string name = firstName[rnd.Next(firstName.Length)];
+            int[] direction = { 0, 0 };
+            int[] location = { (rnd.Next(0, Program.streets.GetLength(0))), (rnd.Next(0, Program.streets.GetLength(1))) };
+            while (direction[0] == 0 && direction[1] == 0)
+            {
+                direction[0] = rnd.Next(-1, 2);
+                direction[1] = rnd.Next(-1, 2);
+            }
+            return new Person(name, location,direction);
         }
     }
 }

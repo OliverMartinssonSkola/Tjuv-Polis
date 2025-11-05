@@ -30,8 +30,7 @@ namespace TjuvochPolis
                 {
                     person.Location[1] = 1;
                 }
-            }
-            
+            }      
         }
         public static void PrisonMovement(List<Person>prisoners)
         {

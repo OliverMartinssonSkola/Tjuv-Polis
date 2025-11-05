@@ -13,7 +13,6 @@ namespace TjuvochPolis
             bool running = true;
             bool vy = true;
             Console.SetBufferSize(300,300);
-           // Console.SetWindowSize(120,80); //Gör inget om man kör med poweshell
 
             Console.CursorVisible = false;
 
@@ -48,7 +47,6 @@ namespace TjuvochPolis
                                 inStreets = false;
                             }
                         }
-                       // Thread.Sleep(500);
                     }
                 }
                 else if (!vy)
@@ -56,11 +54,7 @@ namespace TjuvochPolis
                     bool inDeveloper = true;
                     while (inDeveloper)
                     {
-
-                        
                         Developer.DeveloperMode(people, prisoners);
-                       // Movement.PrisonMovement(prisoners);
-                       // Movement.CityMovement(people);
                        if(Console.KeyAvailable)
                        { 
                             ConsoleKeyInfo key = Console.ReadKey(true);
@@ -78,7 +72,7 @@ namespace TjuvochPolis
                             }
                        }
                        Thread.Sleep(500);
-                       Console.Write("\u001bc\x1b[3J");
+                        Console.Write("\u001bc\x1b[3J");
                     }
 
                 }
