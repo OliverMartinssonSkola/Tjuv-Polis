@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TjuvochPolis
 {
     
-    internal class Person
+    internal class Person //SKAPAR BAS-KLASS PERSON
     {
         public string Name { get; set; }
         public int[] Location { get; set; }
@@ -23,7 +23,7 @@ namespace TjuvochPolis
         }
     }
 
-    class Citizen:Person
+    class Citizen:Person //SKAPAR SUB-KLASS FÖR MEDBORGARE
     {
        
         public List<string> Belongings= new List<string>();
@@ -34,7 +34,7 @@ namespace TjuvochPolis
         }
     }
 
-    class Cop:Person
+    class Cop:Person // SKAPAR SUB-KLASS FÖR POLIS
     {
         
         public List <string> Beslagtaget { get; set; }
@@ -46,7 +46,7 @@ namespace TjuvochPolis
         }
     }
 
-    class Thief:Person
+    class Thief:Person //SKAPAR SUB-KLASS FÖR TJUV
     {
         public bool InPrison { get; set; } = false;
         public int[] PrisonLocation { get; set; }

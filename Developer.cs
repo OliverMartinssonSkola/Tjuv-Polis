@@ -10,15 +10,15 @@ namespace TjuvochPolis
 {
     internal class Developer
     {
-        public static void DeveloperMode(List<Person>people, List<Person> prisoners)
+        public static void DeveloperMode(List<Person>people, List<Person> prisoners) //LISTAR PERSONER PLATS RÖRELSE MM.
         {
             
             foreach (Person person in people)
             {
-                if (person is Thief thief)
+                if (person is Thief thief) //LISTAR INFO OM TJUVAR
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    if (thief.InPrison)
+                    if (thief.InPrison && thief.TimeInPrison > 0)
                     {
                         Console.Write("T " + person.Name + " Sitter i fängelset ");                       
                     }
@@ -50,7 +50,7 @@ namespace TjuvochPolis
                     }
                     Console.ResetColor();
                 }
-                else if (person is Cop cop)
+                else if (person is Cop cop)//LISTAR INFO OM POLIS
                 {
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.Write("| P " + person.Name + " ");
@@ -81,7 +81,7 @@ namespace TjuvochPolis
                         Console.ResetColor();
                     
                 }
-                else if (person is Citizen citizen)
+                else if (person is Citizen citizen)//LISTAR INFO OM MEDBORGARE
                 {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write("M " + person.Name + " ");

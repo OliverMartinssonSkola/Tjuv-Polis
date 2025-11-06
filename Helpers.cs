@@ -9,9 +9,9 @@ namespace TjuvochPolis
 {
     internal class Helpers
     {
-        public static List<string> interactions = new List<string>();
+        public static List<string> interactions = new List<string>(); //lISTA FÖR HÄNDELSER
         
-        public static void CitienCreator(List<Person> people)
+        public static void CitienCreator(List<Person> people) //SKAPAR ALLA MEDBORGARE OCH LÄGGER TILL I LISTA PEOPLE
         {
 
             Random rnd = new Random();
@@ -37,7 +37,7 @@ namespace TjuvochPolis
                 people.Add(new Thief(t.Name, t.Location, t.Direction, stöldgods, inPrison, prisonLocation));
             }
         }
-        public static void Interaction(List<Person> people, List<Person>prisoners)
+        public static void Interaction(List<Person> people, List<Person>prisoners) //KOLLISIONS-VILLKOR
         {
             
             foreach (var person1 in people)
@@ -46,44 +46,44 @@ namespace TjuvochPolis
                 {
                     if (person1 != person2 && person1.Location[0] == person2.Location[0] && person1.Location[1] == person2.Location[1])
                     {
-                        if (person1 is Citizen citizen1 && person2 is Cop cop1)
+                        if (person1 is Citizen citizen1 && person2 is Cop cop1) //MEDBORGARE MÖTER POLIS
                         {
                             interactions.Add("Medborgaren " + person1.Name + " träffar polisen " + person2.Name + ", och hälsar på varandra.");
                         }
 
-                        if (person1 is Citizen citizen2 && person2 is Thief thief1)
+                        if (person1 is Citizen citizen2 && person2 is Thief thief1)//MEDBORGARE MÖTER TJUV
                         {
-                            if (citizen2.Belongings.Count != 0) // om medborgaren har något
+                            if (citizen2.Belongings.Count != 0) //OM MEDBORGARE HAR ÄGODELAR 
                             {
                                 Random rnd = new Random();
                                 int index = rnd.Next(0, citizen2.Belongings.Count);
                                 string item = citizen2.Belongings[index];
-                                citizen2.Belongings.RemoveAt(index); // ta bort item från medborgarens inventory
-                                thief1.Stöldgods.Add(item); // lägga den i tjuvens inventory
+                                citizen2.Belongings.RemoveAt(index);
+                                thief1.Stöldgods.Add(item);
                                 interactions.Add("Tjuven " + person2.Name + " rånar medborgaren " + person1.Name +  " på hens " + item);
                                 
                                 
                             }
-                            else
+                            else //OM MEDBORGARE INTE HAR ÄGODELAR
                             {
                                 interactions.Add("Medborgaren " + person1.Name + "s fickor var tomma och tjuven " + person2.Name + " blir sur!!!");
                             }
 
                         }
-                        else if (person1 is Cop cop2 && person2 is Thief thief2 && !thief2.InPrison)
+                        else if (person1 is Cop cop2 && person2 is Thief thief2 && !thief2.InPrison) //POLIS MÖTER TJUV
                         {
-                            if (thief2.Stöldgods.Count > 0 )
+                            if (thief2.Stöldgods.Count > 0 ) //OM TJUV HAR STÖLDGODS
                             {
-                                thief2.TimeInPrison = (thief2.Stöldgods.Count * 10);
-                                cop2.Beslagtaget.AddRange(thief2.Stöldgods); // lägga alla grejer i polisens iventory
-                                thief2.Stöldgods.Clear(); // tomma tjuvens inventory
+                                thief2.TimeInPrison = (thief2.Stöldgods.Count * 10); //VILLKOR FÖR TID I FÄNGELSE
+                                cop2.Beslagtaget.AddRange(thief2.Stöldgods);
+                                thief2.Stöldgods.Clear();
                                 interactions.Add("Polisen " + person1.Name + " griper tjuven " + person2.Name + " och beslagtar alla stulna saker.");
                                 thief2.InPrison = true;
-                                prisoners.Add(thief2 as Thief);
+                                prisoners.Add(thief2);
                                 
                                 
                             }
-                            else 
+                            else //OM TJUV INTE HAR STÖLDGODS
                             {
                                 interactions.Add("Polisen "+ person1.Name + " möter tjuven "+ person2.Name + " och säger: \"jag håller ögonen på dig!!\"");
                             }
@@ -92,7 +92,7 @@ namespace TjuvochPolis
                 }
             }  
         }
-        public static void InteractionList()
+        public static void InteractionList()//LISTAR DE 5 SISTA HÄNDELSERNA I HÄNDELSELISTA
         {
             Console.SetCursorPosition(22, 26);
             Console.ForegroundColor = ConsoleColor.Green;
@@ -107,7 +107,7 @@ namespace TjuvochPolis
             }            
         }
 
-        public static void PrisonersList(List<Person>prisoners)
+        public static void PrisonersList(List<Person>prisoners)//LISTAR TJUVAR I FÄNGELSE
         {
 
             int x = 1;
@@ -115,7 +115,8 @@ namespace TjuvochPolis
             Console.ForegroundColor= ConsoleColor.Red;
             Console.Write("Gäster i hotell \"GRIPEN\":");
             Console.ResetColor();
-            for (int y = 0; y < prisoners.Count; y++)            {
+            for (int y = 0; y < prisoners.Count; y++)            
+            {
                 Console.SetCursorPosition(105, x);
                 Console.WriteLine( "> "+ prisoners[y].Name + " " + ((Thief)prisoners[y]).TimeInPrison);
                 x++;
@@ -125,12 +126,11 @@ namespace TjuvochPolis
                 }
                 if (((Thief)prisoners[y]).TimeInPrison == 0)
                 {
-
                     prisoners.Remove(prisoners[y]);
                 }
             }
         }
-        internal static Person PersonCreator()
+        internal static Person PersonCreator() //SÄTTER VÄRDEN PÅ BASKLASSEN
         {
             Random rnd = new Random();
             string[] firstName = new string[]

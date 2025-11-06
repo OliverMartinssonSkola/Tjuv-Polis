@@ -8,7 +8,7 @@ namespace TjuvochPolis
 {
     internal class Movement
     {
-        public static void CityMovement(List<Person> people)
+        public static void CityMovement(List<Person> people) //VILLKOR FÖR RÖRELSEMÖNSTER I CITY
         {
             foreach (Person person in people)
             {
@@ -32,25 +32,25 @@ namespace TjuvochPolis
                 }
             }      
         }
-        public static void PrisonMovement(List<Person>prisoners)
+        public static void PrisonMovement(List<Person>prisoners) //VILLKOR FÖR RÖRELSEMÖNSTER I PRISON
         {
-            foreach(Person prisoner in prisoners)
+            foreach(Thief prisoner in prisoners)
             {
                 if (prisoner is Thief thief && thief.InPrison)
                 {
-                    thief.PrisonLocation[0] += prisoner.Direction[0];
-                    if (thief.PrisonLocation[0] < 1)
+                    prisoner.PrisonLocation[0] += prisoner.Direction[0];
+                    if (prisoner.PrisonLocation[0] < 1)
                     {
-                        thief.PrisonLocation[0] = Program.prison.GetLength(0) - 2;
+                        prisoner.PrisonLocation[0] = Program.prison.GetLength(0) - 1;
                     }
-                    else if (thief.PrisonLocation[0] >= Program.prison.GetLength(0))
+                    else if (prisoner.PrisonLocation[0] >= Program.prison.GetLength(0))
                     {
                         thief.PrisonLocation[0] = 1;
                     }
                     thief.PrisonLocation[1] += prisoner.Direction[1];
                     if (thief.PrisonLocation[1] < 1)
                     {
-                        thief.PrisonLocation[1] = Program.prison.GetLength(1) - 2;
+                        thief.PrisonLocation[1] = Program.prison.GetLength(1) - 1;
                     }
                     else if (thief.PrisonLocation[1] >= Program.prison.GetLength(1))
                     {
