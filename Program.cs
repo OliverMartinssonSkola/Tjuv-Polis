@@ -36,12 +36,12 @@ namespace TjuvochPolis
                             ConsoleKeyInfo key = Console.ReadKey(true);
                             if (key.Key == ConsoleKey.Spacebar)//VILLKOR FÖR ATT VÄXLA VY ELLER AVSLUTA PROGRAM
                             {
-                                vy = false;      //växla till developer mode
-                                inStreets = false; //avsluta sub-loop
+                                vy = false;
+                                inStreets = false;
                             }
                             else if (key.Key == ConsoleKey.Escape)
                             {
-                                running = false; // avsluta
+                                running = false;
                                 inStreets = false;
                             }
                         }
@@ -61,11 +61,11 @@ namespace TjuvochPolis
                             {
                                 
                                 inDeveloper = false;
-                                vy = true; //växla till street
+                                vy = true;
                             }
                             else if (key.Key == ConsoleKey.Escape)
                             {
-                                running = false; //avsluta
+                                running = false;
                                 inDeveloper = false;
 
                             }
